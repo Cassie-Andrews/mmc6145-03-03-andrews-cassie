@@ -20,6 +20,7 @@ export default function Search() {
   // Use a query of "React"
   useEffect(() => {
     async function getBookSearchResults(query) {
+
       setFetching(true)
       try {
         const res = await fetch(`https://www.googleapis.com/books/v1/volumes?langRestrict=en&maxResults=16&q=${query}`)
@@ -45,7 +46,7 @@ export default function Search() {
 
     const newQuery = query
 
-    if (fetching || newQuery === previousQuery) return
+    if (!newQuery || fetching || newQuery === previousQuery) return
     // This function MUST prevent repeat searches if:
     // fetch has not finished
     // the query is unchanged
